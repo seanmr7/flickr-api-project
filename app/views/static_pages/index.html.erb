@@ -1,0 +1,15 @@
+<h1>Index</h1>
+
+<%= form_with(url: root_path, method: :get, local: true) do |f| %>
+  <%= f.label :id %>
+  <%= f.text_field :id, placeholder: "Enter a user ID" %>
+
+  <%= submit_tag "Show Photos", name: nil %>
+
+<% end %>
+
+<% if params.has_key?(:id) %>
+  <% @photos.each do |photo| %>
+    <%= image_tag "https://live.staticflickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}.jpg"%><br>
+  <% end %>
+<% end %>
