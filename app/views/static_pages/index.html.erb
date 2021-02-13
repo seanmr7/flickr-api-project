@@ -1,15 +1,28 @@
-<h1>Index</h1>
+<div class="container-fluid">
+  <div class="row justify-content-md-center mt-5">
+    <div class="col-md-6">
+      <h1 class="text-center mb-4">Public Picture App</h1>
 
-<%= form_with(url: root_path, method: :get, local: true) do |f| %>
-  <%= f.label :id %>
-  <%= f.text_field :id, placeholder: "Enter a user ID" %>
-
-  <%= submit_tag "Show Photos", name: nil %>
-
-<% end %>
-
-<% if params.has_key?(:id) %>
-  <% @photos.each do |photo| %>
-    <%= image_tag "https://live.staticflickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}.jpg"%><br>
+      <%= form_with(url: root_path, method: :get, local: true) do |f| %>
+        <div class="row g-3 justify-content-md-center">
+          <div class="col-auto">
+            <%= f.text_field :id, placeholder: "Enter a Flickr user ID" %>
+          </div>
+          <div class="col-auto">
+            <%= submit_tag "Show Photos", name: nil %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if params.has_key?(:id) %>
+    <div class="row g-3 mt-3">
+      <h4 class="text-center">Showing <%= "#{@user['username']}'s" %> Photostream</h4>
+        <% @photos.each do |photo| %>
+          <div class="col-md-4 text-center">
+            <%= image_tag("https://live.staticflickr.com/#{photo['server']}/#{photo['id']}_#{photo['secret']}.jpg", size: "500x334") %><br>
+          </div>
+        <% end %>
+    </div>
   <% end %>
-<% end %>
+</div>
